@@ -10,12 +10,14 @@ export function PostList({ posts }: PostListProps) {
       {posts.map((post) => (
         <div
           key={post.id}
-          className="bg-white p-4 rounded-lg shadow border border-gray200"
+          className="bg-slate-800 p-4 rounded-lg shadow border border-slate-700"
         >
           <div className="flex justify-between items-start">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <h2 className="text-xl font-semibold">{post.title}</h2>
+                <h2 className="text-xl font-semibold text-[#e6f0fc]">
+                  {post.title}
+                </h2>
                 <span
                   className={`px-2 py-1 text-xs rounded-full ${
                     post.status === "published"
@@ -27,9 +29,9 @@ export function PostList({ posts }: PostListProps) {
                 </span>
               </div>
               {post.excerpt && (
-                <p className="text-gray-600 text-sm mb2">{post.excerpt}</p>
+                <p className="text-slate-300 text-sm mb2">{post.excerpt}</p>
               )}
-              <p className="text-gray-400 text-xs">
+              <p className="text-slate-400 text-xs">
                 Tạo ngày:{" "}
                 {new Date(post.created_at).toLocaleDateString("vi-VN")}
               </p>
@@ -37,14 +39,14 @@ export function PostList({ posts }: PostListProps) {
             <div className="flex items-center gap-2">
               <Link
                 href={`/posts/${post.slug}`}
-                className="text-gray-500 hover:text-gray-700 px-3 py-1
+                className="text-slate-300 hover:text-[#e6f0fc] px-3 py-1
 text-sm"
               >
                 Xem
               </Link>
               <Link
                 href={`/dashboard/edit/${post.id}`}
-                className="text-blue-600 hover:text-blue-500 px-3 py-1
+                className="text-blue-400 hover:text-blue-300 px-3 py-1
 text-sm"
               >
                 Sửa

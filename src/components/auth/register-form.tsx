@@ -53,7 +53,7 @@ export function RegisterForm() {
         <div>
           <label
             htmlFor="displayName"
-            className="block text-sm fontmedium text-gray-700"
+            className="block text-sm fontmedium text-gray-900"
           >
             Tên hiển thị
           </label>
@@ -63,7 +63,7 @@ export function RegisterForm() {
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500
+            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-blue-500
 focus:border-blue-500"
             placeholder="Nguyễn Văn A"
           />
@@ -72,7 +72,7 @@ focus:border-blue-500"
           <label
             htmlFor="email"
             className="block text-sm font-medium
-text-gray-700"
+text-gray-900"
           >
             Email
           </label>
@@ -82,7 +82,7 @@ text-gray-700"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500
+            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-blue-500
 focus:border-blue-500"
             placeholder="email@example.com"
           />
@@ -91,7 +91,7 @@ focus:border-blue-500"
           <label
             htmlFor="password"
             className="block text-sm font-medium
-text-gray-700"
+text-gray-900"
           >
             Mật khẩu
           </label>
@@ -102,21 +102,21 @@ text-gray-700"
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500
+            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-blue-500
 focus:border-blue-500"
             placeholder="••••••••"
           />
-          <p className="mt-1 text-xs text-gray-500">Tối thiểu 6 ký tự</p>
+          <p className="mt-1 text-xs text-gray-900">Tối thiểu 6 ký tự</p>
         </div>
       </div>
       <button
         type="submit"
         disabled={loading}
-        className="w-full flex justify-center py-2 px-4 border bordertransparent rounded-md shadow-sm text-sm font-medium text-white bg-blue600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border bordertransparent rounded-md shadow-sm text-sm font-medium text-[#e6f0fc] bg-slate-900 hover:bg-slate-800 border-slate-700 focus:outline-none focus:ring-2 focus:ring-offset2 focus:ring-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Đang xử lý..." : "Đăng ký"}
       </button>
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-gray-900">
         Đã có tài khoản?{" "}
         <Link href="/login" className="text-blue-600 hover:text-blue500">
           Đăng nhập

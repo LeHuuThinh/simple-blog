@@ -22,30 +22,34 @@ export default async function DashboardPage() {
     console.error("Error fetching posts:", error);
   }
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Bài viết của tôi</h1>
-        <Link
-          href="/dashboard/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md
-hover:bg-blue-700"
-        >
-          + Viết bài mới
-        </Link>
-      </div>
-      {posts && posts.length > 0 ? (
-        <PostList posts={posts} />
-      ) : (
-        <div className="text-center py-12 bg-gray-50 rounded-lg">
-          <p className="text-gray-500 mb-4">Bạn chưa có bài viết nào.</p>
+    <div className="min-h-screen bg-slate-900">
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-[#e6f0fc]">
+            Bài viết của tôi
+          </h1>
           <Link
             href="/dashboard/new"
-            className="text-blue-600 hover:text-blue-500"
+            className="bg-[#e6f0fc] text-slate-900 px-4 py-2 rounded-md
+hover:bg-[#d0e3f8] font-medium"
           >
-            Viết bài đầu tiên →
+            + Viết bài mới
           </Link>
         </div>
-      )}
-    </main>
+        {posts && posts.length > 0 ? (
+          <PostList posts={posts} />
+        ) : (
+          <div className="text-center py-12 bg-slate-800 rounded-lg border border-slate-700">
+            <p className="text-[#e6f0fc] mb-4">Bạn chưa có bài viết nào.</p>
+            <Link
+              href="/dashboard/new"
+              className="text-blue-400 hover:text-blue-300"
+            >
+              Viết bài đầu tiên →
+            </Link>
+          </div>
+        )}
+      </main>
+    </div>
   );
 }

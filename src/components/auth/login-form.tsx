@@ -61,7 +61,7 @@ export function LoginForm() {
           onClick={handleGitHubLogin}
           className="w-full flex items-center justify-center gap-2 py-2
 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium
-text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2
+text-gray-700 bg-[#e6f0fc] hover:bg-gray-50 focus:outline-none focus:ring-2
 focus:ring-offset-2 focus:ring-blue-500"
         >
           <svg
@@ -94,7 +94,7 @@ focus:ring-offset-2 focus:ring-blue-500"
           <div className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-gray-500">Hoặc</span>
+          <span className="px-2 bg-[#e6f0fc] text-gray-900">Hoặc</span>
         </div>
       </div>
       {/* Email/Password Form */}
@@ -103,7 +103,7 @@ focus:ring-offset-2 focus:ring-blue-500"
           <label
             htmlFor="email"
             className="block text-sm font-medium
-text-gray-700"
+text-gray-900"
           >
             Email
           </label>
@@ -113,7 +113,7 @@ text-gray-700"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500
+            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-blue-500
 focus:border-blue-500"
             placeholder="email@example.com"
           />
@@ -122,7 +122,7 @@ focus:border-blue-500"
           <label
             htmlFor="password"
             className="block text-sm font-medium
-text-gray-700"
+text-gray-900"
           >
             Mật khẩu
           </label>
@@ -132,7 +132,7 @@ text-gray-700"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500
+            className="mt-1 block w-full px-3 py-2 border border-gray300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-blue-500
 focus:border-blue-500"
             placeholder="••••••••"
           />
@@ -140,12 +140,12 @@ focus:border-blue-500"
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center py-2 px-4 border bordertransparent rounded-md shadow-sm text-sm font-medium text-white bg-blue600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex justify-center py-2 px-4 border bordertransparent rounded-md shadow-sm text-sm font-medium text-[#e6f0fc] bg-slate-900 hover:bg-slate-800 border-slate-700 focus:outline-none focus:ring-2 focus:ring-offset2 focus:ring-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Đang xử lý..." : "Đăng nhập"}
         </button>
       </form>
-      <p className="text-center text-sm text-gray-600">
+      <p className="text-center text-sm text-gray-900">
         Chưa có tài khoản?{" "}
         <Link href="/register" className="text-blue-600 hover:text-blue500">
           Đăng ký ngay

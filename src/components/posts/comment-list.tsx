@@ -15,7 +15,7 @@ export function CommentList({ comments }: CommentListProps) {
       {comments.map((comment) => (
         <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
-            <span className="font-medium">
+            <span className="font-medium text-gray-900">
               {comment.profiles?.display_name || "Ẩn danh"}
             </span>
             <span className="text-gray-400 text-sm">

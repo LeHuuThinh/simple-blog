@@ -7,11 +7,11 @@ export async function Header() {
     data: { user },
   } = await supabase.auth.getUser();
   return (
-    <header className="bg-white shadow">
+    <header className="bg-[#e6f0fc] shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold text-gray-900">
-            Simple Blog
+            Thịnh Blog
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/" className="text-gray-600 hover:text-gray900">
@@ -44,8 +44,7 @@ export async function Header() {
                 </Link>
                 <Link
                   href="/register"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md
-hover:bg-blue-700"
+                  className="bg-slate-900 text-[#e6f0fc] px-4 py-2 rounded-md hover:bg-slate-800"
                 >
                   Đăng ký
                 </Link>

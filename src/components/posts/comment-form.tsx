@@ -64,7 +64,7 @@ shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
       <button
         type="submit"
         disabled={loading || !content.trim()}
-        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bgblue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-4 py-2 bg-[#e6f0fc] text-slate-900 font-medium rounded-md hover:bg-[#d0e3f8] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Đang gửi..." : "Gửi bình luận"}
       </button>
