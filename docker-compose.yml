@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: simple_blog_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    # Gọi trực tiếp các biến môi trường từ đây hoặc chèn file .env.local vào container
+    env_file:
+      - .env.local
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
