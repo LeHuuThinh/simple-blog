@@ -13,6 +13,7 @@ export function PostForm({ post }: PostFormProps) {
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.content || "");
   const [excerpt, setExcerpt] = useState(post?.excerpt || "");
+  const [category, setCategory] = useState(post?.category || "Khác");
   const [status, setStatus] = useState<PostStatus>(post?.status || "draft");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,7 @@ export function PostForm({ post }: PostFormProps) {
         title,
         content,
         excerpt,
+        category,
         status,
         published_at: status === "published" ? new Date().toISOString() : null,
       };
@@ -144,6 +146,42 @@ focus:border-blue-500 font-mono"
       </div>
       <div>
         <label
+          htmlFor="category"
+          className="block text-sm font-medium
+text-gray-700"
+        >
+          Chủ đề
+        </label>
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300
+rounded-md shadow-sm focus:outline-none focus:ring-blue-500
+focus:border-blue-500 text-white bg-slate-800"
+        >
+          <option className="text-black bg-white" value="Lập trình">
+            Lập trình
+          </option>
+          <option className="text-black bg-white" value="Đời sống">
+            Đời sống
+          </option>
+          <option className="text-black bg-white" value="Thương mại điện tử">
+            Thương mại điện tử
+          </option>
+          <option className="text-black bg-white" value="Học máy">
+            Học máy
+          </option>
+          <option className="text-black bg-white" value="Dự án">
+            Dự án
+          </option>
+          <option className="text-black bg-white" value="Khác">
+            Khác
+          </option>
+        </select>
+      </div>
+      <div>
+        <label
           htmlFor="status"
           className="block text-sm font-medium
 text-gray-700"
@@ -156,10 +194,14 @@ text-gray-700"
           onChange={(e) => setStatus(e.target.value as PostStatus)}
           className="mt-1 block w-full px-3 py-2 border border-gray-300
 rounded-md shadow-sm focus:outline-none focus:ring-blue-500
-focus:border-blue-500"
+focus:border-blue-500 text-white bg-slate-800"
         >
-          <option value="draft">Bản nháp</option>
-          <option value="published">Xuất bản</option>
+          <option className="text-black bg-white" value="draft">
+            Bản nháp
+          </option>
+          <option className="text-black bg-white" value="published">
+            Xuất bản
+          </option>
         </select>
       </div>
       <div className="flex justify-end gap-4">

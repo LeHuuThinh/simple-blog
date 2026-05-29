@@ -14,6 +14,7 @@ export interface Post {
   content: string | null;
   excerpt: string | null;
   status: PostStatus;
+  category: string;
   created_at: string;
   updated_at: string;
   published_at: string | null;

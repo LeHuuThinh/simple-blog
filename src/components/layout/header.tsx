@@ -25,6 +25,12 @@ export async function Header() {
                 >
                   Dashboard
                 </Link>
+                <Link 
+                  href="/dashboard/profile"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Hồ sơ của tôi
+                </Link>
                 <form action={logout}>
                   <button
                     type="submit"

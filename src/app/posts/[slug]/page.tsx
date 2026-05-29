@@ -1,8 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { CommentForm } from "@/components/posts/comment-form";
 import { CommentList } from "@/components/posts/comment-list";
+import { LikeButton } from "@/components/posts/like-button";
+
 interface PostPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -58,10 +61,33 @@ export default async function PostPage({ params }: PostPageProps) {
     )
     .eq("post_id", post.id)
     .order("created_at", { ascending: true });
+
+  // Đếm tổng số lượt like của bài viết
+  const { count: likesCount } = await supabase
+    .from("likes")
+    .select("*", { count: "exact", head: true })
+    .eq("post_id", post.id);
+
   // Kiểm tra user đã đăng nhập chưa
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // Kiểm tra xem User hiện tại đã like bài viết chưa
+  let initialIsLiked = false;
+  if (user) {
+    const { data: likeData } = await supabase
+      .from("likes")
+      .select("id")
+      .eq("post_id", post.id)
+      .eq("user_id", user.id)
+      .single();
+
+    if (likeData) {
+      initialIsLiked = true;
+    }
+  }
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-8">
       <article>
@@ -69,7 +95,15 @@ export default async function PostPage({ params }: PostPageProps) {
           <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 
           <div className="flex items-center gap-4 text-gray-500">
-            <span>Bởi {post.profiles?.display_name || "Ẩn danh"}</span>
+            <span>
+              Bởi{" "}
+              <Link
+                href={`/authors/${post.author_id}`}
+                className="hover:text-blue-600 transition-colors"
+              >
+                {post.profiles?.display_name || "Ẩn danh"}
+              </Link>
+            </span>
             <span>•</span>
             <time>
               {post.published_at
@@ -86,6 +120,15 @@ export default async function PostPage({ params }: PostPageProps) {
           {post.content?.split("\n").map((paragraph: string, index: number) => (
             <p key={index}>{paragraph}</p>
           ))}
+        </div>
+
+        {/* Nút Like Bài viết */}
+        <div className="mb-12 flex justify-center sm:justify-start">
+          <LikeButton
+            postId={post.id}
+            initialLikesCount={likesCount || 0}
+            initialIsLiked={initialIsLiked}
+          />
         </div>
       </article>
       {/* Comments Section */}

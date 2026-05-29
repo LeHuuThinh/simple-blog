@@ -7,17 +7,14 @@ export default async function HomePage({
 }) {
   const params = await searchParams;
   const page = Number(params?.page) || 1;
+  const categoryFilter = params?.category as string | undefined;
   const limit = 5;
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 
   const supabase = await createClient();
-  // Lấy bài viết đã publish, kèm thông tin author
-  const {
-    data: posts,
-    count,
-    error,
-  } = await supabase
+  // Khởi tạo truy vấn
+  let query = supabase
     .from("posts")
     .select(
       `
@@ -29,21 +26,67 @@ export default async function HomePage({
  `,
       { count: "exact" },
     )
-    .eq("status", "published")
-    .order("published_at", { ascending: false })
-    .range(from, to);
+    .eq("status", "published");
+
+  // Nếu có bộ lọc category, thêm điều kiện eq
+  if (categoryFilter) {
+    query = query.eq("category", categoryFilter);
+  }
+
+  // Lấy bài viết đã publish, kèm thông tin author
+  const {
+    data: posts,
+    count,
+    error,
+  } = await query.order("published_at", { ascending: false }).range(from, to);
 
   const totalPages = count ? Math.ceil(count / limit) : 0;
 
   if (error) {
     console.error("Error fetching posts:", error);
   }
+
   return (
     <div className="min-h-screen bg-slate-900">
       <main className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-[#e6f0fc] mb-8">
           Bài viết mới nhất
         </h1>
+
+        {/* Thanh phân loại bằng Category */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          <Link
+            href="/"
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              !categoryFilter
+                ? "bg-blue-600 text-white"
+                : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+            }`}
+          >
+            Tất cả
+          </Link>
+          {[
+            "Lập trình",
+            "Đời sống",
+            "Thương mại điện tử",
+            "Học máy",
+            "Dự án",
+            "Khác",
+          ].map((cat) => (
+            <Link
+              key={cat}
+              href={`/?category=${encodeURIComponent(cat)}`}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                categoryFilter === cat
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+              }`}
+            >
+              {cat}
+            </Link>
+          ))}
+        </div>
+
         {posts && posts.length > 0 ? (
           <div className="space-y-6">
             {posts.map((post) => (
@@ -57,12 +100,26 @@ export default async function HomePage({
                   </h2>
                 </Link>
 
+                <div className="mt-3">
+                  <span className="inline-block px-3 py-1 bg-slate-700 text-slate-200 text-xs font-semibold rounded-full">
+                    {post.category || "Khác"}
+                  </span>
+                </div>
+
                 {post.excerpt && (
                   <p className="text-slate-300 mt-2">{post.excerpt}</p>
                 )}
 
                 <div className="flex items-center gap-4 mt-4 text-sm text-slate-400">
-                  <span>Bởi {post.profiles?.display_name || "Ẩn danh"}</span>
+                  <span>
+                    Bởi{" "}
+                    <Link
+                      href={`/authors/${post.author_id}`}
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      {post.profiles?.display_name || "Ẩn danh"}
+                    </Link>
+                  </span>
                   <span>•</span>
                   <span>
                     {post.published_at

@@ -1,4 +1,5 @@
 import { Comment } from "@/types/database";
+import Link from "next/link";
 interface CommentListProps {
   comments: Comment[];
 }
@@ -15,9 +16,12 @@ export function CommentList({ comments }: CommentListProps) {
       {comments.map((comment) => (
         <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
-            <span className="font-medium text-gray-900">
+            <Link
+              href={`/authors/${comment.author_id}`}
+              className="font-medium text-gray-900 hover:text-blue-600"
+            >
               {comment.profiles?.display_name || "Ẩn danh"}
-            </span>
+            </Link>
             <span className="text-gray-400 text-sm">
               {new Date(comment.created_at).toLocaleDateString("vi-VN")}
             </span>
